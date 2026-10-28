@@ -1,9 +1,77 @@
-# OTokenUsage Releases
+# OTokenUsage
 
-Windows x64 installers and release notes for OTokenUsage.
+โปรแกรม Windows 11 สำหรับดูยอด **token** และ **โควตา** ของเครื่องมือ AI จากข้อมูลจริงในเครื่องของคุณ แสดงเป็นแถบเล็กบน taskbar และหน้ารายละเอียด รองรับ Claude Code, Codex และ Antigravity
 
-Download the [latest release](https://github.com/kriangdet-chuaboonjun/OTokenUsage-Releases/releases/latest).
+> Windows x64 installers and release notes for OTokenUsage. Shows real token usage and quota for AI coding tools on Windows 11, read locally. UI in Thai and English. This repository only hosts installers, checksums and release notes; application source is maintained separately.
 
-Starting with 0.0.26, open Settings > Program updates to check and download updates. Setup preserves existing usage data and settings. Users of older versions should install this version manually once.
+## ดาวน์โหลด
 
-This public repository contains installers, checksums and release notes. Application source is maintained separately.
+ดาวน์โหลด `OTokenUsage-Setup-<เวอร์ชัน>.exe` จาก [**Latest release**](https://github.com/kriangdet-chuaboonjun/OTokenUsage-Releases/releases/latest)
+
+- ต้องใช้ Windows 11 x64 ไม่ต้องติดตั้ง .NET เพิ่ม (self-contained)
+- ติดตั้งโดยไม่ต้องใช้สิทธิ์ admin ลงที่ `%LOCALAPPDATA%\Programs\OTokenUsage`
+- ทุก release มีไฟล์ `.sha256` ให้ตรวจความครบถ้วนของไฟล์ (ไม่ใช่ลายเซ็นผู้เผยแพร่)
+
+```powershell
+Get-FileHash .\OTokenUsage-Setup-<เวอร์ชัน>.exe -Algorithm SHA256
+```
+
+## ทำอะไรได้บ้าง
+
+### ดูโควตาและ token จากข้อมูลจริง
+- แสดงโควตารอบ 5 ชั่วโมง / รายสัปดาห์ เปอร์เซ็นต์ที่ใช้ไป และเวลารีเซ็ต (ตามเขตเวลาของเครื่อง)
+- ดูประวัติ token รายวัน/รายเดือน แยกตามโมเดลและโปรเจกต์ (Claude Code และ Codex) รวมถึง cache และ subagent
+- ชี้เมาส์ที่โลโก้ AI บน taskbar เพื่อดู tooltip สรุปแต่ละรอบ พร้อมเวลาที่เหลือ
+- เมื่อผ่านเวลารีเซ็ตจะแสดง "รออัปเดต" จนกว่าจะได้ข้อมูลรอบใหม่ ค่าที่ไม่ทราบแสดงเป็น `—` ไม่ใช่ 0
+- โควตามาจากค่าจริงของต้นทางเท่านั้น ไม่คำนวณจาก token และไม่รวมเปอร์เซ็นต์ข้ามเครื่องมือ
+
+### แถบย่อบน taskbar
+- **แถบลอย** ชิด taskbar ลากย้ายได้ ดับเบิลคลิกเพื่อเปิดรายละเอียด
+- **กราฟTaskbar (ทดลอง)** ฝังกราฟในพื้นที่ว่างของ taskbar โดยไม่ย้ายปุ่ม Start หรือไอคอนระบบ
+- เลือกรูปแบบ **กราฟ** หรือ **ตัวเลข** เช่น `5h 24% · 3h`
+- แสดงตาม AI ที่เปิดดึงข้อมูลอยู่โดยอัตโนมัติ
+- เอฟเฟกต์ Liquid Glass ปรับความใสได้ (ปิดเป็นค่าเริ่มต้น)
+
+### ใช้งานสะดวก
+- กด **Ctrl + Alt + O** จากโปรแกรมใดก็ได้เพื่อเปิด/ซ่อนหน้าสรุปโควตาใกล้เมาส์
+- ไอคอนใน system tray: ดับเบิลคลิกเปิดรายละเอียด คลิกขวามีรีเฟรช ตั้งค่า ซ่อน/แสดงแถบ และออก
+- ปิดหน้าต่างหรือกด Esc จะซ่อนไป tray โปรแกรมทำงานต่อ
+- ธีม Dark / White / ตามระบบ Windows
+- UI ภาษาไทยและอังกฤษ สลับได้ทันที
+- เปิดพร้อม Windows ได้ (ปิดเป็นค่าเริ่มต้น)
+
+### หน้าตั้งค่า
+แบ่งเป็น 4 แท็บ: **ทั่วไป**, **AI ที่ดึงข้อมูล**, **วิดเจ็ต**, **อัปเดตโปรแกรม** เลือกเปิด/ปิดการดึงข้อมูลของแต่ละ AI ปรับพาธข้อมูล และความถี่ซิงก์อัตโนมัติได้
+
+### อัปเดตออนไลน์
+ที่ **ตั้งค่า → อัปเดตโปรแกรม** กดตรวจสอบอัปเดตเพื่อดูเวอร์ชันใหม่และ release notes ดาวน์โหลดพร้อมแสดงความคืบหน้า แล้วติดตั้งทับเวอร์ชันเดิมโดยเก็บข้อมูลและการตั้งค่าไว้
+
+- โปรแกรมตรวจขนาดและ SHA-256 ก่อนติดตั้ง ถ้าไม่ตรงจะไม่ติดตั้ง
+- ตรวจอัตโนมัติทุก 24 ชั่วโมงได้ (แจ้งเตือนอย่างเดียว ไม่ดาวน์โหลดหรือติดตั้งเอง)
+- ผู้ใช้ก่อนเวอร์ชัน 0.0.26 ต้องติดตั้ง Setup รุ่นใหม่ด้วยตนเองหนึ่งครั้ง จากนั้นอัปเดตจากในโปรแกรมได้
+
+## ข้อมูลมาจากไหน
+
+| เครื่องมือ | ได้อะไร |
+|---|---|
+| Claude Code | token, cache, โมเดล/โปรเจกต์ และโควตา 5 ชั่วโมง/รายสัปดาห์ |
+| Codex | token, โมเดล และโควตา |
+| Antigravity | โควตารายโมเดล/กลุ่มและเวลารีเซ็ต (ต้องเปิด Antigravity อยู่) |
+
+ยอดมาจากประวัติที่ยังอยู่ในเครื่อง ไม่ใช่ยอดบัญชีทุกอุปกรณ์หรือใบเรียกเก็บเงิน
+
+## ความเป็นส่วนตัว
+
+- อ่านข้อมูลต้นทางอย่างเดียว ไม่เก็บบทสนทนา prompt หรือผลลัพธ์ของเครื่องมือ
+- เก็บเฉพาะสถิติในเครื่องที่ `%LOCALAPPDATA%\OTokenUsage` การถอนการติดตั้งไม่ลบข้อมูลสถิติ
+- การดึงโควตาจากเซิร์ฟเวอร์ของ Claude เป็นตัวเลือก **ปิดไว้เป็นค่าเริ่มต้น** เมื่อเปิด โปรแกรมใช้ token ในหน่วยความจำเท่านั้น ไม่บันทึกลงดิสก์หรือ log
+- Codex: อ่านข้อมูลยืนยันตัวตนของ Codex เข้าหน่วยความจำเพื่อดึงโควตา ส่วน Antigravity เรียกเฉพาะ localhost
+- การตรวจอัปเดตเรียก GitHub แบบไม่ยืนยันตัวตน ไม่ใช้ข้อมูลของ AI
+
+## ถอนการติดตั้ง
+
+ถอนได้จาก Windows → Settings → Apps หรือรันตัวติดตั้งอีกครั้งแล้วเลือกถอนการติดตั้ง
+
+## เกี่ยวกับ repository นี้
+
+repository สาธารณะนี้มีเฉพาะตัวติดตั้ง, checksum และ release notes ไม่มีซอร์สโค้ดของโปรแกรม ดูประวัติการเปลี่ยนแปลงทั้งหมดได้ที่ [Releases](https://github.com/kriangdet-chuaboonjun/OTokenUsage-Releases/releases)
